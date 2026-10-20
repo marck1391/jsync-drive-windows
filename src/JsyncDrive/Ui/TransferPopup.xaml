@@ -1,0 +1,38 @@
+<Window x:Class="JsyncDrive.TransferPopup"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:ui="clr-namespace:JsyncDrive.Ui"
+        Style="{DynamicResource AppWindow}" Width="412" SizeToContent="Height" WindowStyle="None" AllowsTransparency="True" Background="Transparent"
+        ShowInTaskbar="False" ShowActivated="False" Topmost="True" ResizeMode="NoResize" Title="jsync Drive">
+    <Border Margin="16" Background="{DynamicResource SurfaceBrush}" BorderBrush="{DynamicResource BorderBrush}" BorderThickness="1" CornerRadius="16" Padding="20">
+        <Border.Effect><DropShadowEffect BlurRadius="24" ShadowDepth="4" Opacity="0.32" Direction="270"/></Border.Effect>
+        <StackPanel>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock x:Name="Heading" Style="{StaticResource Label}" Margin="0,4,0,0" TextTrimming="CharacterEllipsis"/>
+                <Button Grid.Column="1" Style="{StaticResource IconBtn}" Width="28" Height="28" Margin="0,-4,-6,0" Click="OnClose">
+                    <Path Data="{StaticResource IconClose}" Width="14" Height="14" Stretch="Uniform" Fill="{Binding Foreground, RelativeSource={RelativeSource AncestorType=Button}}"/>
+                </Button>
+            </Grid>
+
+            <!-- preview: the picture itself, or the icon of its kind -->
+            <Border Background="{DynamicResource ThumbBgBrush}" CornerRadius="12" Height="170" Margin="0,8,0,14" ClipToBounds="True">
+                <Grid>
+                    <Path x:Name="KindIcon" Width="56" Height="56" Stretch="Uniform"/>
+                    <Image x:Name="Picture" Stretch="Uniform" Margin="0" Visibility="Collapsed" RenderOptions.BitmapScalingMode="HighQuality"/>
+                </Grid>
+            </Border>
+
+            <TextBlock x:Name="FileName" FontSize="16" FontWeight="SemiBold" TextTrimming="CharacterEllipsis"/>
+            <TextBlock x:Name="Detail" Style="{StaticResource Caption}" Margin="0,3,0,0" TextTrimming="CharacterEllipsis"/>
+
+            <ProgressBar x:Name="Bar" Margin="0,14,0,0" Maximum="100" Visibility="Collapsed"/>
+            <TextBlock x:Name="Message" Margin="0,12,0,0" TextWrapping="Wrap" Visibility="Collapsed"/>
+
+            <WrapPanel x:Name="Buttons" Margin="0,16,0,0"/>
+        </StackPanel>
+    </Border>
+</Window>

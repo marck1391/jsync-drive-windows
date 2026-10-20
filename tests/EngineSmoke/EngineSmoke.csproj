@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+  <ItemGroup>
+    <!-- the engine layer has no UI: it is compiled straight into this harness -->
+    <Compile Include="..\..\src\JsyncDrive\Engine\*.cs" LinkBase="Engine" />
+    <Using Include="System.Net.Http.Json" />
+  </ItemGroup>
+</Project>

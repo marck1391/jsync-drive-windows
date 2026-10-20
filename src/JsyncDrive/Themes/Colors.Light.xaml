@@ -1,0 +1,35 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Color x:Key="BgColor">#F5F6F8</Color>
+    <Color x:Key="SurfaceColor">#FFFFFF</Color>
+    <Color x:Key="SurfaceAltColor">#EEF0F4</Color>
+    <Color x:Key="BorderColor">#E1E4EA</Color>
+    <Color x:Key="TextColor">#151A22</Color>
+    <Color x:Key="MutedColor">#5D6878</Color>
+    <Color x:Key="AccentColor">#2B5BC4</Color>
+    <Color x:Key="AccentHoverColor">#234DAB</Color>
+    <Color x:Key="AccentSoftColor">#E7EEFC</Color>
+    <Color x:Key="DangerColor">#C62828</Color>
+    <Color x:Key="DangerSoftColor">#FCEBEB</Color>
+    <Color x:Key="SuccessColor">#1E8E3E</Color>
+    <Color x:Key="WarnColor">#B26A00</Color>
+
+    <SolidColorBrush x:Key="BgBrush" Color="{StaticResource BgColor}"/>
+    <SolidColorBrush x:Key="SurfaceBrush" Color="{StaticResource SurfaceColor}"/>
+    <SolidColorBrush x:Key="SurfaceAltBrush" Color="{StaticResource SurfaceAltColor}"/>
+    <SolidColorBrush x:Key="BorderBrush" Color="{StaticResource BorderColor}"/>
+    <SolidColorBrush x:Key="TextBrush" Color="{StaticResource TextColor}"/>
+    <SolidColorBrush x:Key="MutedBrush" Color="{StaticResource MutedColor}"/>
+    <SolidColorBrush x:Key="AccentBrush" Color="{StaticResource AccentColor}"/>
+    <SolidColorBrush x:Key="AccentHoverBrush" Color="{StaticResource AccentHoverColor}"/>
+    <SolidColorBrush x:Key="AccentSoftBrush" Color="{StaticResource AccentSoftColor}"/>
+    <SolidColorBrush x:Key="OnAccentBrush" Color="#FFFFFF"/>
+    <SolidColorBrush x:Key="DangerBrush" Color="{StaticResource DangerColor}"/>
+    <SolidColorBrush x:Key="DangerSoftBrush" Color="{StaticResource DangerSoftColor}"/>
+    <SolidColorBrush x:Key="SuccessBrush" Color="{StaticResource SuccessColor}"/>
+    <SolidColorBrush x:Key="WarnBrush" Color="{StaticResource WarnColor}"/>
+    <SolidColorBrush x:Key="HoverBrush" Color="#0F151A22"/>
+    <SolidColorBrush x:Key="PressBrush" Color="#1A151A22"/>
+    <SolidColorBrush x:Key="ScrimBrush" Color="#66000000"/>
+    <SolidColorBrush x:Key="ThumbBgBrush" Color="#E9ECF1"/>
+</ResourceDictionary>

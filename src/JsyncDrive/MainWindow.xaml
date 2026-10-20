@@ -1,0 +1,67 @@
+<Window x:Class="JsyncDrive.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:ui="clr-namespace:JsyncDrive.Ui"
+        Style="{DynamicResource AppWindow}" Title="jsync Drive" Width="1180" Height="780" MinWidth="900" MinHeight="580"
+        WindowStartupLocation="CenterScreen" Icon="pack://application:,,,/Assets/app.ico">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="240"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Border Background="{DynamicResource SurfaceBrush}" BorderBrush="{DynamicResource BorderBrush}" BorderThickness="0,0,1,0">
+            <DockPanel Margin="14,18,14,16" LastChildFill="False">
+                <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Margin="8,0,0,22">
+                    <Image Source="pack://application:,,,/Assets/app-256.png" Width="34" Height="34" RenderOptions.BitmapScalingMode="HighQuality"/>
+                    <TextBlock Text="jsync Drive" Style="{StaticResource H2}" VerticalAlignment="Center" Margin="12,0,0,0"/>
+                </StackPanel>
+
+                <StackPanel DockPanel.Dock="Top">
+                    <RadioButton x:Name="NavFiles" Style="{StaticResource NavBtn}" Tag="files" Checked="OnNav">
+                        <StackPanel Orientation="Horizontal">
+                            <Path Data="{StaticResource IconCloud}" Width="20" Height="20" Stretch="Uniform" Fill="{Binding Foreground, RelativeSource={RelativeSource AncestorType=RadioButton}}"/>
+                            <TextBlock Text="{ui:T 'My Drive'}" Margin="14,0,0,0"/>
+                        </StackPanel>
+                    </RadioButton>
+                    <RadioButton x:Name="NavDevices" Style="{StaticResource NavBtn}" Tag="devices" Checked="OnNav">
+                        <StackPanel Orientation="Horizontal">
+                            <Path Data="{StaticResource IconDevices}" Width="20" Height="20" Stretch="Uniform" Fill="{Binding Foreground, RelativeSource={RelativeSource AncestorType=RadioButton}}"/>
+                            <TextBlock Text="{ui:T 'Devices'}" Margin="14,0,0,0"/>
+                        </StackPanel>
+                    </RadioButton>
+                    <RadioButton x:Name="NavFolder" Style="{StaticResource NavBtn}" Tag="folder" Checked="OnNav">
+                        <StackPanel Orientation="Horizontal">
+                            <Path Data="{StaticResource IconFolder}" Width="20" Height="20" Stretch="Uniform" Fill="{Binding Foreground, RelativeSource={RelativeSource AncestorType=RadioButton}}"/>
+                            <TextBlock Text="{ui:T 'Drive folder'}" Margin="14,0,0,0"/>
+                        </StackPanel>
+                    </RadioButton>
+                    <RadioButton x:Name="NavServer" Style="{StaticResource NavBtn}" Tag="server" Checked="OnNav">
+                        <StackPanel Orientation="Horizontal">
+                            <Path Data="{StaticResource IconServer}" Width="20" Height="20" Stretch="Uniform" Fill="{Binding Foreground, RelativeSource={RelativeSource AncestorType=RadioButton}}"/>
+                            <TextBlock Text="{ui:T 'Server (hub)'}" Margin="14,0,0,0"/>
+                        </StackPanel>
+                    </RadioButton>
+                    <RadioButton x:Name="NavSettings" Style="{StaticResource NavBtn}" Tag="settings" Checked="OnNav">
+                        <StackPanel Orientation="Horizontal">
+                            <Path Data="{StaticResource IconSettings}" Width="20" Height="20" Stretch="Uniform" Fill="{Binding Foreground, RelativeSource={RelativeSource AncestorType=RadioButton}}"/>
+                            <TextBlock Text="{ui:T 'Settings'}" Margin="14,0,0,0"/>
+                        </StackPanel>
+                    </RadioButton>
+                </StackPanel>
+
+                <Border DockPanel.Dock="Bottom" Background="{DynamicResource SurfaceAltBrush}" CornerRadius="12" Padding="14,12" Cursor="Hand" MouseLeftButtonUp="OnStatusClick">
+                    <StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <Ellipse x:Name="StatusDot" Width="9" Height="9" Fill="{DynamicResource MutedBrush}" VerticalAlignment="Center"/>
+                            <TextBlock x:Name="StatusTitle" Text="…" FontWeight="SemiBold" Margin="9,0,0,0"/>
+                        </StackPanel>
+                        <TextBlock x:Name="StatusText" Style="{StaticResource Caption}" Margin="0,4,0,0" TextWrapping="Wrap"/>
+                    </StackPanel>
+                </Border>
+            </DockPanel>
+        </Border>
+
+        <ContentControl x:Name="PageHost" Grid.Column="1"/>
+    </Grid>
+</Window>

@@ -1,0 +1,171 @@
+<UserControl x:Class="JsyncDrive.ServerPage"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:ui="clr-namespace:JsyncDrive.Ui">
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <StackPanel Margin="32,26,32,32" MaxWidth="900" HorizontalAlignment="Stretch">
+            <TextBlock Text="{ui:T 'Server (hub)'}" Style="{StaticResource H1}"/>
+            <TextBlock Text="{ui:T 'This PC connects your devices and keeps the files of your Drive. Other devices point at the addresses below.'}" Style="{StaticResource Muted}" Margin="0,4,0,22"/>
+
+            <!-- status -->
+            <Border Style="{StaticResource Card}" Margin="0,0,0,16">
+                <StackPanel>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Border Width="52" Height="52" CornerRadius="14" Background="{DynamicResource AccentSoftBrush}" VerticalAlignment="Top">
+                            <Path Data="{StaticResource IconServer}" Width="26" Height="26" Stretch="Uniform" Fill="{DynamicResource AccentBrush}"/>
+                        </Border>
+                        <StackPanel Grid.Column="1" Margin="16,0,0,0" VerticalAlignment="Center">
+                            <StackPanel Orientation="Horizontal">
+                                <Ellipse x:Name="Dot" Width="10" Height="10" Fill="{DynamicResource MutedBrush}" VerticalAlignment="Center"/>
+                                <TextBlock x:Name="StateTitle" FontSize="16" FontWeight="SemiBold" Margin="9,0,0,0"/>
+                            </StackPanel>
+                            <TextBlock x:Name="StateText" Style="{StaticResource Muted}" Margin="0,4,0,0"/>
+                        </StackPanel>
+                    </Grid>
+                    <Separator Margin="0,18"/>
+                    <CheckBox x:Name="InAppSwitch" Style="{StaticResource Switch}" Content="{ui:T 'Run the hub while jsync Drive is open'}" Checked="OnInApp" Unchecked="OnInApp"/>
+                    <TextBlock Text="{ui:T 'No administrator needed. It stops when you quit jsync Drive.'}" Style="{StaticResource Caption}" Margin="54,2,0,18"/>
+
+                    <TextBlock Text="{ui:T 'Windows service'}" Style="{StaticResource Label}"/>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock x:Name="ServiceStateText" VerticalAlignment="Center" Margin="0,0,16,0"/>
+                        <Button x:Name="InstallBtn" Style="{StaticResource PrimaryBtn}" Content="{ui:T 'Install service'}" Click="OnInstall" Margin="0,0,8,0"/>
+                        <Button x:Name="StartBtn" Content="{ui:T 'Start'}" Click="OnServiceStart" Margin="0,0,8,0"/>
+                        <Button x:Name="StopBtn" Content="{ui:T 'Stop'}" Click="OnServiceStop" Margin="0,0,8,0"/>
+                        <Button x:Name="UninstallBtn" Style="{StaticResource DangerBtn}" Content="{ui:T 'Uninstall'}" Click="OnUninstall"/>
+                    </StackPanel>
+                    <TextBlock Text="{ui:T 'Always on, even when nobody is signed in to Windows. Windows asks for administrator permission each time you change it.'}" Style="{StaticResource Caption}" Margin="0,8,0,0"/>
+                </StackPanel>
+            </Border>
+
+            <!-- connect -->
+            <Border Style="{StaticResource Card}" Margin="0,0,0,16">
+                <StackPanel>
+                    <TextBlock Text="{ui:T 'Connect your devices'}" Style="{StaticResource H2}" Margin="0,0,0,4"/>
+                    <TextBlock Text="{ui:T 'In the app on each device, use these two addresses.'}" Style="{StaticResource Muted}" Margin="0,0,0,14"/>
+                    <TextBlock Text="{ui:T 'Hub address'}" Style="{StaticResource Label}"/>
+                    <ItemsControl x:Name="HubAddrs" Margin="0,0,0,14">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Grid Margin="0,0,0,6">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBox Text="{Binding Mode=OneWay}" IsReadOnly="True" FontFamily="Cascadia Mono, Consolas"/>
+                                    <Button Grid.Column="1" Style="{StaticResource IconBtn}" Margin="6,0,0,0" Click="OnCopy" ToolTip="{ui:T 'Copy'}">
+                                        <Path Data="{StaticResource IconCopy}" Width="17" Height="17" Stretch="Uniform" Fill="{Binding Foreground, RelativeSource={RelativeSource AncestorType=Button}}"/>
+                                    </Button>
+                                </Grid>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                    <TextBlock Text="{ui:T 'Drive address'}" Style="{StaticResource Label}"/>
+                    <ItemsControl x:Name="DriveAddrs" Margin="0,0,0,6">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Grid Margin="0,0,0,6">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBox Text="{Binding Mode=OneWay}" IsReadOnly="True" FontFamily="Cascadia Mono, Consolas"/>
+                                    <Button Grid.Column="1" Style="{StaticResource IconBtn}" Margin="6,0,0,0" Click="OnCopy" ToolTip="{ui:T 'Copy'}">
+                                        <Path Data="{StaticResource IconCopy}" Width="17" Height="17" Stretch="Uniform" Fill="{Binding Foreground, RelativeSource={RelativeSource AncestorType=Button}}"/>
+                                    </Button>
+                                </Grid>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                    <TextBlock x:Name="MachineText" Style="{StaticResource Caption}" Margin="0,6,0,0"/>
+                </StackPanel>
+            </Border>
+
+            <!-- configuration -->
+            <Border Style="{StaticResource Card}" Margin="0,0,0,16">
+                <StackPanel>
+                    <TextBlock Text="{ui:T 'Configuration'}" Style="{StaticResource H2}" Margin="0,0,0,14"/>
+
+                    <TextBlock Text="{ui:T 'Where the Drive files are kept'}" Style="{StaticResource Label}"/>
+                    <Grid Margin="0,0,0,16">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBox x:Name="StorageBox"/>
+                        <Button Grid.Column="1" Content="{ui:T 'Choose…'}" Margin="8,0,0,0" Click="OnChooseStorage"/>
+                    </Grid>
+
+                    <Grid Margin="0,0,0,16">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="16"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <StackPanel>
+                            <TextBlock Text="{ui:T 'Hub port (devices connect here)'}" Style="{StaticResource Label}"/>
+                            <TextBox x:Name="LeafPortBox"/>
+                        </StackPanel>
+                        <StackPanel Grid.Column="2">
+                            <TextBlock Text="{ui:T 'Drive port'}" Style="{StaticResource Label}"/>
+                            <TextBox x:Name="DrivePortBox"/>
+                        </StackPanel>
+                    </Grid>
+
+                    <TextBlock Text="{ui:T 'Account service address'}" Style="{StaticResource Label}"/>
+                    <TextBox x:Name="AccountsBox" ui:Hint.Text="https://auth.example.com" Margin="0,0,0,16"/>
+
+                    <TextBlock Text="{ui:T 'Account service secret'}" Style="{StaticResource Label}"/>
+                    <PasswordBox x:Name="SecretBox" Margin="0,0,0,4"/>
+                    <TextBlock Text="{ui:T 'The JWT secret of your account service (GoTrue). Leave empty to keep the one already saved.'}" Style="{StaticResource Caption}" Margin="0,0,0,16"/>
+
+                    <TextBlock Text="{ui:T 'Drive web app address (optional)'}" Style="{StaticResource Label}"/>
+                    <TextBox x:Name="WebBox" ui:Hint.Text="https://drive.example.com" Margin="0,0,0,16"/>
+
+                    <TextBlock Text="{ui:T 'Administrators (emails, separated by commas)'}" Style="{StaticResource Label}"/>
+                    <TextBox x:Name="AdminsBox" Margin="0,0,0,16"/>
+
+                    <Expander Header="{ui:T 'Advanced'}" Foreground="{DynamicResource TextBrush}" Margin="0,0,0,16">
+                        <Grid Margin="0,10,0,0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="16"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="16"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <StackPanel>
+                                <TextBlock Text="{ui:T 'Listen on'}" Style="{StaticResource Label}"/>
+                                <TextBox x:Name="HostBox"/>
+                            </StackPanel>
+                            <StackPanel Grid.Column="2">
+                                <TextBlock Text="{ui:T 'Client port'}" Style="{StaticResource Label}"/>
+                                <TextBox x:Name="ClientPortBox"/>
+                            </StackPanel>
+                            <StackPanel Grid.Column="4">
+                                <TextBlock Text="{ui:T 'Drive listens on'}" Style="{StaticResource Label}"/>
+                                <TextBox x:Name="DriveHostBox"/>
+                            </StackPanel>
+                        </Grid>
+                    </Expander>
+
+                    <StackPanel Orientation="Horizontal">
+                        <Button Style="{StaticResource PrimaryBtn}" Content="{ui:T 'Save and apply'}" Click="OnApply"/>
+                        <TextBlock x:Name="ApplyNote" VerticalAlignment="Center" Margin="14,0,0,0" Style="{StaticResource Caption}" TextWrapping="Wrap"/>
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+
+            <Expander Header="{ui:T 'Activity log'}" Foreground="{DynamicResource TextBrush}">
+                <Border Style="{StaticResource Card}" Padding="14" Margin="0,8,0,0">
+                    <TextBox x:Name="LogBox" IsReadOnly="True" FontFamily="Cascadia Mono, Consolas" FontSize="12" MaxHeight="260" VerticalScrollBarVisibility="Auto"
+                             TextWrapping="NoWrap" HorizontalScrollBarVisibility="Auto" BorderThickness="0" Background="Transparent"/>
+                </Border>
+            </Expander>
+        </StackPanel>
+    </ScrollViewer>
+</UserControl>
